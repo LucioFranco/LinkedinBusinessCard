@@ -1,0 +1,38 @@
+<!DOCTUPE html>
+<html ng-app="linkedinApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatable" content="IE-edge">
+        <title>Tecnicaltest</title>
+
+
+    </head>
+    <body>
+
+    </body>
+
+    <div ng-controller="meetupsController">
+        <h1>There are {{ meetupsCount }} meetups</h1>
+
+
+        <ul>
+            <li ng-repeat="meetup in meetups">
+                {{ meetup.name }}
+            </li>
+        </ul>
+
+        <form ng-submit="createMeetup()">
+            <input type="text" placeholder="Meetup name" ng-model="meetupName"></input>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <script src="/js/vendor/angular/angular.js"></script>
+    <script src="/js/vendor/angular-resource/angular-resource.js"></script>
+    <script src="/js/vendor/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers/meetupsController.js"></script>
+
+    </body>
+</html>

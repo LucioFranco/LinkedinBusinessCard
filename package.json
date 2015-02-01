@@ -1,0 +1,11 @@
+{
+  "name": "technicaltest",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.3.11",
+    "body-parser": "^1.11.0",
+    "express": "^4.11.1",
+    "mongoose": "^3.8.22",
+    "node-linkedin": "^0.3.5"
+  }
+}
