@@ -7,7 +7,7 @@ app.run(function(editableOptions) {
 app.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'subviews/index.html',
+            templateUrl: 'subviews/home.html',
             controller: 'HomeController'
         }).when('', {
             templateUrl: 'subviews/index.html',

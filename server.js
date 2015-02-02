@@ -59,7 +59,9 @@ app.get('/api/getme', linkedinController.getme);
 app.post('/api/getme', linkedinController.getme);
 
 app.all('/', routes.index);
-//app.get('*', routes.index);
-app.listen(3000, function() {
-        console.log('Server listening... on localhost/3000');
+
+var port = process.env.PORT || 3000;
+console.log(port);
+app.listen(port, function() {
+        console.log('Server listening... on localhost:' + port);
 });
