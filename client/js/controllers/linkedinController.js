@@ -33,12 +33,8 @@ app.config(['$routeProvider', '$locationProvider',
 
 app.controller('HomeController', ['$scope', '$http',
     function($scope, $http) {
-
-
         $http.get('api/getme').success(function(data) {
-
-            if(true || !data.linkedinid) {
-                console.log("ads");
+            if(!data.linkedinid) {
                 $scope.alerts = [
                     { type: 'danger', msg: "It looks like you are not logged in. Please loggin via Linkedin at the above link"}
                 ];
