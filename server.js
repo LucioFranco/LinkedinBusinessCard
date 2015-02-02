@@ -3,9 +3,16 @@ var app = express();
 var mongoose = require('mongoose');
 var linkedinController = require('./server/controllers/linkedinController');
 var bodyParser = require('body-parser');
-var Linkedin = require('node-linkedin')('78qiht85oc8bac', '1RbWvjRzU9xsVzf7', 'http://localhost:3000/oauth/linkedin/callback');
+var env = require('node-env-file');
+env(__dirname + '/.env');
+var Linkedin = require('node-linkedin')(process.env.apikey, process.env.apisecret, 'http://localhost:3000/oauth/linkedin/callback');
 var session = require('express-session');
 var routes = require('./routes');
+
+
+
+
+console.log(process.env.apikey);
 
 mongoose.connect('mongodb://localhost:27017/mean-demo');
 var linkedin = Linkedin.init('1RbWvjRzU9xsVzf7');
@@ -25,7 +32,7 @@ app.get('/api/getme', linkedinController.getme);
 
 app.get('/oauth/login', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
-    Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
+    Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo']);
 });
 
 app.get('/logout', function(req, res) {
