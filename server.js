@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-var meetupsController = require('./server/controllers/meetupsController');
 var linkedinController = require('./server/controllers/linkedinController');
 var bodyParser = require('body-parser');
 var Linkedin = require('node-linkedin')('78qiht85oc8bac', '1RbWvjRzU9xsVzf7', 'http://localhost:3000/oauth/linkedin/callback');
@@ -15,18 +14,16 @@ app.use(bodyParser());
 app.use(session({ secret: 'ombudsecret' }));
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/img', express.static(__dirname + '/client/img'));
+app.use('/css', express.static(__dirname + '/client/css'));
 
 
 app.get('/subviews/:name', function(req, res) {
     res.sendFile(__dirname + '/client/views/subviews/' + req.params.name);
 });
 
-//TODO app.get('/api/isloggedin', )
-
 app.get('/api/getme', linkedinController.getme);
 
 app.get('/oauth/login', function(req, res) {
-    console.log('hit here');
     // This will ask for permisssions etc and redirect to callback url.
     Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo', 'rw_nus', 'rw_groups', 'w_messages']);
 });
@@ -50,11 +47,6 @@ app.get('/error', function(req, res) {
 
 
 //REST API
-app.post('/api/meetups', meetupsController.create);
-app.get('/api/meetups', meetupsController.list);
-
-app.post('/api/getindustry', linkedinController.getIndustry);
-app.get('/api/getindustry', linkedinController.getIndustry);
 
 app.get('/api/getme', linkedinController.getme);
 app.post('/api/getme', linkedinController.getme);

@@ -1,0 +1,109 @@
+/* entire container, keeps perspective */
+.card-container {
+    perspective: 1000;
+        -ms-perspective: 1000;
+        -moz-perspective: 1000;
+        -webkit-perspective: 1000;
+
+    transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+}
+    .card-container a {
+        color: white;
+    }
+    .card-container.right-align {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .card-container.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*  UPDATED! flip the pane when hovered */
+    .card-container:active .back {
+        transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+            -moz-transform: rotateY(0deg);
+
+    }
+
+
+
+.card-container, .front, .back {
+    height: 320px;
+    width: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+    box-shadow: 5px 5px 2.5px #888888;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*  UPDATED! front pane, placed above back */
+.front {
+    background-color: rgb(88, 119, 181);
+    z-index: 2;
+}
+
+.front .nav {
+    position: absolute;
+    padding-top: 1.85em;
+    padding-left: 1em;
+}
+
+.front .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.front .nav li {
+}
+
+.front .nav .icon {
+    width: 48px;
+    height: 48px;
+    background-color: #e1e8ed;
+    opacity: .75;
+}
+
+    .front .nav .icon:hover {
+        background-color: #f5f8fa;
+        opacity: 1;
+    }
+
+.front .title-entry, .front .info-entry {
+        padding-right: 1.75em;
+        text-align: right;
+    }
+    .front .title-entry, .front #job-title {
+        padding-top: 1.5em;
+    }
+
+    .front .title-entry {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .front .info-entry, a {
+        color: #ddd;
+        text-decoration: none;
+    }
