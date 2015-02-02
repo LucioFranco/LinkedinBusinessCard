@@ -15,24 +15,31 @@ module.exports.callback = function(req, res) {
          * Results have something like:
          * {"expires_in":5184000,"access_token":". . . ."}
          */
-        console.log(results);
         var linkedin = Linkedin.init(JSON.parse(results).access_token);
         var resjson = {};
 
         linkedin.people.me(function(err, data) {
-            console.log(data);
 
-            var profile = new LinkedinProfile({
-                "firstName": data.firstName,
-                "lastName": data.lastName,
-                "email": data.emailAddress,
-                "industry": data.industry,
-                "location": data.location.name,
-                "headline": data.headline
-            });
+            LinkedinProfile.findOne({ linkedinid: data.id }, function (err, result) {
+                if(result === null) {
+                    console.log("adding " + data.formattedName + " to the db");
+                    var profile = new LinkedinProfile({
+                        "linkedinid": data.id,
+                        "firstName": data.firstName,
+                        "lastName": data.lastName,
+                        "email": data.emailAddress,
+                        "industry": data.industry,
+                        "location": data.location.name,
+                        "headline": data.headline
+                    });
 
-            profile.save(function (err, result) {
-                res.json(result);
+                    profile.save(function (err, result) {
+                        res.json(result);
+                    });
+                }else {
+                    console.log(result);
+                    res.json(result);
+                }
             });
         });
     });
