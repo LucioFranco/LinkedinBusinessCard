@@ -6,10 +6,12 @@ var linkedinController = require('./server/controllers/linkedinController');
 var bodyParser = require('body-parser');
 var Linkedin = require('node-linkedin')('78qiht85oc8bac', '1RbWvjRzU9xsVzf7', 'http://localhost:3000/oauth/linkedin/callback');
 
+
 mongoose.connect('mongodb://localhost:27017/mean-demo');
 var linkedin = Linkedin.init('1RbWvjRzU9xsVzf7');
 
 app.use(bodyParser());
+app.use('/js', express.static(__dirname + '/client/js'));
 
 app.get('/', function(req, res) {
         res.sendFile(__dirname + '/client/views/index.html');
@@ -27,8 +29,6 @@ app.get('/oauth/linkedin', function(req, res) {
 
 app.get('/oauth/linkedin/callback', linkedinController.callback);
 
-app.use('/js/vendor', express.static(__dirname + '/public/javascripts/vendor'));
-app.use('/js', express.static(__dirname + '/client/js'));
 
 //REST API
 app.post('/api/meetups', meetupsController.create);
