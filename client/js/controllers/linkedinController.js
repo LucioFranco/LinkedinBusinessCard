@@ -1,4 +1,4 @@
-var app = angular.module('linkedinApp', ['ngResource', 'ngRoute', 'xeditable']);
+var app = angular.module('linkedinApp', ['ngResource', 'ngRoute', 'xeditable', 'ui.bootstrap']);
 
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -33,6 +33,7 @@ app.controller('HomeController', ['$scope', '$http',
     function($scope, $http) {
         $http.get('api/getme').success(function(data) {
             if(!data.linkedinid) {
+                //FIXME fix ui.bootstrap stuff
                 $scope.alerts = [
                     { type: 'danger', msg: "It looks like you are not logged in. Please loggin via Linkedin at the above link"}
                 ];
