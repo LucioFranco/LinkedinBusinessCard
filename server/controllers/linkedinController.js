@@ -1,5 +1,9 @@
 var LinkedinProfile = require('../models/linkedin');
 
+module.exports.getcard = function(req, res) {
+    //TODO make get card post api call
+};
+
 module.exports.getme = function(req, res) {
     var session = req.session;
 

@@ -6,8 +6,6 @@ app.run(function(editableOptions) {
 
 app.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
-        //TODO fix routing for html5
-        //$locationProvider.html5Mode(true);
         $routeProvider.when('/', {
             templateUrl: 'subviews/index.html',
             controller: 'HomeController'
@@ -56,7 +54,6 @@ app.controller('LogoutController', ['$scope', '$http',
 app.controller('CardController', ['$scope', '$http',
     function($scope, $http) {
         $http.get('api/getme').success(function(data) {
-            //TODO fix name formating
             $scope.formattedName = data.formattedName;
             $scope.headline = data.headline;
             $scope.email = data.email;
