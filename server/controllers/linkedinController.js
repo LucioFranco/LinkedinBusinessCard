@@ -26,7 +26,7 @@ module.exports.getme = function(req, res) {
     var session = req.session;
 
     if(!session.linkedinid) {
-        res.redirect('/login');
+        res.redirect('/#/login');
         return;
     }
 
