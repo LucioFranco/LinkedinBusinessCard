@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('profile', {
     linkedinid: String,
-    firstname: String,
-    lastname: String,
+    firstName: String,
+    lastName: String,
     email: String,
     industry: String,
     location: String,

@@ -1,1 +1,1 @@
-var app = angular.module('linkedinApp', ['ngResource']);
+var app = angular.module('linkedinApp', ['ngResource', 'ngRoute', 'linkedinController']);
