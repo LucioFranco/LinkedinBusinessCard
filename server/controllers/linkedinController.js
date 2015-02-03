@@ -1,4 +1,5 @@
 var LinkedinProfile = require('../models/linkedin');
+var Card = require('../models/linkedin');
 
 module.exports.getcard = function(req, res) {
     //TODO make get card post api call
@@ -22,6 +23,38 @@ module.exports.getme = function(req, res) {
     }
 
     LinkedinProfile.findOne({ linkedinid: session.linkedinid }, function(err, result) {
+        res.json(result);
+    });
+};
+
+module.exports.getCards = function(req, res) {
+    Card.find({ linkedinid: req.params.linkedinid }, function(err, result) {
+        res.json(result);
+    });
+};
+
+module.exports.getCard = function(req, res) {
+    Card.findOne({ _id: mongoose.Types.ObjectId(req.params.cardid) }, function(err, result) {
+        res.json(result);
+    });
+};
+
+module.exports.saveCard = function(req, res) {
+    var params = req.params;
+
+    var card = new Card({
+        userid: params.userid,
+        formattedName: params.formattedName,
+        email: params.email,
+        website: params.website,
+        phoneNumber: params.phoneNumber,
+        location: params.location,
+        headline: params.headline,
+        pictureUrl: params.pictureUrl
+    });
+
+    card.save(function(err, result) {
+        //TODO fix redirect for save card
         res.json(result);
     });
 };
@@ -69,6 +102,7 @@ module.exports.callback = function(req, res) {
                     });
 
                     profile.save(function (err, result) {
+                        //TODO fix redirect for linkedin save
                         res.json(data);
                     });
                 }else {

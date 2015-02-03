@@ -51,9 +51,14 @@ app.get('/error', function(req, res) {
 
 
 //REST API
-
 app.get('/api/getme', linkedinController.getme);
-app.post('/api/getme', linkedinController.getme);
+
+app.get('/api/cards/:linkedinid', linkedinController.getCards);
+app.post('/api/cards/:linkedinid', linkedinController.getCards);
+
+app.get('/api/card/:cardid', linkedinController.getCard);
+
+app.get('/api/savecard/:userid/:formattedName/:email/:website/:phoneNumber/:location/:headline/:pictureUrl', linkedinController.saveCard);
 
 app.all('/', function(req, res) {
     res.sendFile(__dirname + '/client/views/layout.html');
