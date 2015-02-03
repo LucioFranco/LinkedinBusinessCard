@@ -1,4 +1,4 @@
 before_install:
-    npm install && bower install
+    npm install
 script:
     node server
