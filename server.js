@@ -3,15 +3,23 @@ var app = express();
 var mongoose = require('mongoose');
 var linkedinController = require('./server/controllers/linkedinController');
 var bodyParser = require('body-parser');
-var env = require('node-env-file');
-env(__dirname + '/.env');
+var fs = require('fs');
+
+if (fs.existsSync(__dirname + '/.env')) {
+    var env = require('node-env-file');
+    env(__dirname + '/.env');
+}
+
 var Linkedin = require('node-linkedin')(process.env.apikey, process.env.apisecret, 'http://localhost:3000/oauth/linkedin/callback');
 var session = require('express-session');
 var routes = require('./routes');
 
 //FIXME fix database from mean-demo to linkedinbusiness
 mongoose.connect('mongodb://localhost:27017/mean-demo');
-var linkedin = Linkedin.init('1RbWvjRzU9xsVzf7');
+var linkedin = Linkedin.init(process.env.apisecret);
+
+console.log('asdfs' + process.env.apikey);
+console.log('asdf' + process.env.apisecret);
 
 app.use(bodyParser());
 app.use(session({ secret: 'ombudsecret' }));
