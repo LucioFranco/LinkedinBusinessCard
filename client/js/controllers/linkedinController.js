@@ -18,9 +18,6 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/login', {
             templateUrl: 'subviews/login.html',
             controller: 'LoginController'
-        }).when('/logout', {
-            templateUrl: 'subviews/logout.html',
-            controller: 'LogoutController'
         }).when('/card', {
             templateUrl: 'subviews/card.html',
             controller: 'CardController'
@@ -29,11 +26,25 @@ app.config(['$routeProvider', '$locationProvider',
         });
 }]);
 
-app.controller('HomeController', ['$scope', '$http',
-    function($scope, $http) {
+function login($rootScope, $http) {
+    $http.get('/isloggedin').success(function(data) {
+        if(data.isloggedin === 'true') {
+            $rootScope.login = 'Logout';
+            $rootScope.loginurl = 'logout';
+        }else {
+            $rootScope.login = 'Login';
+            $rootScope.loginurl = '#/login';
+        }
+    });
+}
+
+app.controller('HomeController', ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
+
+        login($rootScope, $http);
+
         $http.get('api/getme').success(function(data) {
             if(!data.linkedinid) {
-                //FIXME fix ui.bootstrap stuff
                 $scope.alerts = [
                     { type: 'danger', msg: "It looks like you are not logged in. Please loggin via Linkedin at the above link"}
                 ];
@@ -42,18 +53,16 @@ app.controller('HomeController', ['$scope', '$http',
 
 }]);
 
-app.controller('LoginController', ['$scope', '$http',
-    function($scope, $http) {
-
+app.controller('LoginController', ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
+        login($rootScope, $http);
 }]);
 
-app.controller('LogoutController', ['$scope', '$http',
-    function($scope, $http) {
+app.controller('CardController', ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
 
-}]);
+        login($rootScope, $http);
 
-app.controller('CardController', ['$scope', '$http',
-    function($scope, $http) {
         $http.get('api/getme').success(function(data) {
             $scope.formattedName = data.formattedName;
             $scope.headline = data.headline;
@@ -66,8 +75,11 @@ app.controller('CardController', ['$scope', '$http',
 }]);
 
 
-app.controller('MeController', ['$scope', '$http',
-    function($scope, $http) {
+app.controller('MeController', ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
+
+        login($rootScope, $http);
+
         $http.get('api/getme').success(function(data) {
             $scope.firstName = data.firstName;
             $scope.lastName = data.lastName;

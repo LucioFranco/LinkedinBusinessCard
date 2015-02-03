@@ -22,23 +22,17 @@
 
     <nav class="navbar navbar-default">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+
           <a class="navbar-brand" href="#">Linkedin Business Card Creator</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/#/">Home</a></li>
-                <li><a href="/#/login">Login</a></li>
-                <li><a href="/#/logout">Logout</a></li>
                 <li><a href="/#/me">My Profile</a></li>
                 <li><a href="/#/card">My Card</a></li>
             </ul>
+            <a href='/{{ loginurl }}'><button type="button" class="btn btn-default navbar-btn navbar-right">{{ login }}</button></a>
         </div>
     </nav>
 

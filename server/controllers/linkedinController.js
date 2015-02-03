@@ -4,6 +4,15 @@ module.exports.getcard = function(req, res) {
     //TODO make get card post api call
 };
 
+module.exports.isloggedin = function(req, res) {
+    var session = req.session;
+    if(!session.linkedinid) {
+        res.json({ 'isloggedin': 'false' });
+    }else {
+        res.json({ 'isloggedin': 'true' });
+    }
+};
+
 module.exports.getme = function(req, res) {
     var session = req.session;
 
