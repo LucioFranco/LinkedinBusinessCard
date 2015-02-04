@@ -50,12 +50,23 @@ module.exports.saveCard = function(req, res) {
         phoneNumber: params.phoneNumber,
         location: params.location,
         headline: params.headline,
-        pictureUrl: params.pictureUrl
+        pictureUrl: params.pictureUrl,
+        cardTitle: params.cardTitle
     });
 
     card.save(function(err, result) {
         //TODO fix redirect for save card
-        res.json(result);
+        var msgs;
+        if(err === null) {
+            msgs = {
+                saved: 'true'
+            };
+        }else {
+            msgs = {
+                saved: 'true'
+            };
+        }
+        res.json(msgs);
     });
 };
 

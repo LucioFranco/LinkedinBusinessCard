@@ -18,8 +18,8 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/card', {
             templateUrl: 'subviews/card.html',
             controller: 'CardController'
-        }).when('cards', {
-            templateUrl: 'subviews/card.html',
+        }).when('/cards', {
+            templateUrl: 'subviews/cards.html',
             controller: 'CardsController'
         }).otherwise({
             redirectTo: '/'
@@ -54,6 +54,19 @@ function auth($rootScope, $http, $window) {
 app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
     function($scope, $http, $rootScope, $window) {
         auth($rootScope, $http, $window);
+
+        $http.get('api/getme').success(function(data) {
+            $scope.cardTitle = data.cardTitle;
+            $scope.formattedName = data.formattedName;
+            $scope.headline = data.headline;
+            $scope.email = data.email;
+            $scope.phoneNumber = data.phoneNumber;
+            $scope.location = data.location;
+            $scope.pictureUrl = data.pictureUrl;
+            $scope.website = data.website;
+        });
+
+        
 }]);
 
 

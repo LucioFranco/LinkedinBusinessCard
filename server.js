@@ -72,7 +72,7 @@ app.post('/api/cards/:linkedinid', linkedinController.getCards);
 
 app.get('/api/card/:cardid', linkedinController.getCard);
 
-app.get('/api/savecard/:userid/:formattedName/:email/:website/:phoneNumber/:location/:headline/:pictureUrl',
+app.get('/api/savecard/:userid/:formattedName/:email/:website/:phoneNumber/:location/:headline/:pictureUrl/:cardTitle',
         linkedinController.saveCard);
 
 app.all('/', routes.layout);

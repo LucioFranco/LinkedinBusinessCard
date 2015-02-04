@@ -8,5 +8,6 @@ module.exports = mongoose.model('cards', {
     phoneNumber: String,
     location: String,
     headline: String,
-    pictureUrl: String
+    pictureUrl: String,
+    cardTitle: String
 });
