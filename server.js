@@ -37,7 +37,13 @@ app.get('/api/getme', linkedinController.getme);
 
 app.get('/oauth/login', function(req, res) {
     // This will ask for permisssions etc and redirect to callback url.
-    Linkedin.auth.authorize(res, ['r_basicprofile', 'r_fullprofile', 'r_emailaddress', 'r_network', 'r_contactinfo']);
+    Linkedin.auth.authorize(res, [
+    'r_basicprofile',
+    'r_fullprofile',
+    'r_emailaddress',
+    'r_network',
+    'r_contactinfo'
+    ]);
 });
 
 app.get('/logout', function(req, res) {
@@ -66,11 +72,10 @@ app.post('/api/cards/:linkedinid', linkedinController.getCards);
 
 app.get('/api/card/:cardid', linkedinController.getCard);
 
-app.get('/api/savecard/:userid/:formattedName/:email/:website/:phoneNumber/:location/:headline/:pictureUrl', linkedinController.saveCard);
+app.get('/api/savecard/:userid/:formattedName/:email/:website/:phoneNumber/:location/:headline/:pictureUrl',
+        linkedinController.saveCard);
 
-app.all('/', function(req, res) {
-    res.sendFile(__dirname + '/client/views/layout.html');
-});
+app.all('/', routes.layout);
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {

@@ -1,4 +1,4 @@
-module.exports.index = function(req, res) {
+module.exports.layout = function(req, res) {
     res.sendFile(__dirname + '/client/views/layout.html');
 };
 

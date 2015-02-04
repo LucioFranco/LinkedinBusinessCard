@@ -9,9 +9,6 @@ app.config(['$routeProvider', '$locationProvider',
         $routeProvider.when('/', {
             templateUrl: 'subviews/home.html',
             controller: 'HomeController'
-        }).when('', {
-            templateUrl: 'subviews/index.html',
-            controller: 'HomeController'
         }).when('/me', {
             templateUrl: 'subviews/me.html',
             controller: 'MeController'
@@ -21,22 +18,44 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/card', {
             templateUrl: 'subviews/card.html',
             controller: 'CardController'
+        }).when('cards', {
+            templateUrl: 'subviews/card.html',
+            controller: 'CardsController'
         }).otherwise({
             redirectTo: '/'
         });
 }]);
 
+//////////HELPER FUNCTIONS /////////////
 function login($rootScope, $http) {
-    $http.get('/isloggedin').success(function(data) {
+    var auth;
+    return $http.get('/isloggedin').success(function(data) {
         if(data.isloggedin === 'true') {
             $rootScope.login = 'Logout';
             $rootScope.loginurl = 'logout';
+            return true;
         }else {
             $rootScope.login = 'Login';
             $rootScope.loginurl = '#/login';
+            return false;
         }
     });
 }
+
+function auth($rootScope, $http, $window) {
+    var log = login($rootScope, $http);
+    if(!log) {
+        $window.location.href = '/';
+    }
+}
+
+
+///////////PAGE CONTROLLERS////////////////
+app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
+    function($scope, $http, $rootScope, $window) {
+        auth($rootScope, $http, $window);
+}]);
+
 
 app.controller('HomeController', ['$scope', '$http', '$rootScope',
     function($scope, $http, $rootScope) {
@@ -58,10 +77,10 @@ app.controller('LoginController', ['$scope', '$http', '$rootScope',
         login($rootScope, $http);
 }]);
 
-app.controller('CardController', ['$scope', '$http', '$rootScope',
-    function($scope, $http, $rootScope) {
+app.controller('CardController', ['$scope', '$http', '$rootScope', '$window',
+    function($scope, $http, $rootScope, $window) {
 
-        login($rootScope, $http);
+        auth($rootScope, $http, $window);
 
         $http.get('api/getme').success(function(data) {
             $scope.formattedName = data.formattedName;
@@ -75,10 +94,10 @@ app.controller('CardController', ['$scope', '$http', '$rootScope',
 }]);
 
 
-app.controller('MeController', ['$scope', '$http', '$rootScope',
-    function($scope, $http, $rootScope) {
+app.controller('MeController', ['$scope', '$http', '$rootScope', '$window',
+    function($scope, $http, $rootScope, $window) {
 
-        login($rootScope, $http);
+        auth($rootScope, $http, $window);
 
         $http.get('api/getme').success(function(data) {
             $scope.firstName = data.firstName;
