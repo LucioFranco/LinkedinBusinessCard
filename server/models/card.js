@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('cards', {
-    userid: String,
+module.exports = mongoose.model('card', {
+    linkedinid: String,
     formattedName: String,
     email: String,
     website: String,

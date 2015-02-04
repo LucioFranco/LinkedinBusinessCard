@@ -1,5 +1,5 @@
 var LinkedinProfile = require('../models/linkedin');
-var Card = require('../models/linkedin');
+var Card = require('../models/card');
 
 module.exports.getcard = function(req, res) {
     //TODO make get card post api call
@@ -41,9 +41,11 @@ module.exports.getCard = function(req, res) {
 
 module.exports.saveCard = function(req, res) {
     var params = req.params;
+    
 
     var card = new Card({
-        userid: params.userid,
+        id: params.id,
+        linkedinid: params.linkedinid,
         formattedName: params.formattedName,
         email: params.email,
         website: params.website,
@@ -66,6 +68,7 @@ module.exports.saveCard = function(req, res) {
                 saved: 'true'
             };
         }
+        console.log('saved:' + msg.saved);
         res.json(msgs);
     });
 };
