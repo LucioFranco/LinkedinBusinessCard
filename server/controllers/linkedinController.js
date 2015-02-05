@@ -41,7 +41,6 @@ module.exports.getCard = function(req, res) {
 
 module.exports.saveCard = function(req, res) {
     var params = req.params;
-    
 
     var card = new Card({
         id: params.id,
@@ -107,17 +106,31 @@ module.exports.callback = function(req, res) {
                         "lastName": data.lastName,
                         "formattedName": data.formattedName,
                         "email": data.emailAddress,
-                        "website": 'http://example.com',
                         "phoneNumber": phoneNumber,
                         "industry": data.industry,
                         "location": data.location.name,
                         "headline": data.headline,
-                        "pictureUrl": data.pictureUrl
+                        "pictureUrl": data.pictureUrl,
+                        "cards": [
+                            {
+                                'linkedinid': data.id,
+                                'formattedName': data.formattedName,
+                                'email': data.emailAddress,
+                                'website': 'http://example.com',
+                                'phoneNumber': phoneNumber,
+                                'location': data.location.name,
+                                'headline': data.headline,
+                                'pictureUrl': data.pictureUrl,
+                                'cardTitle': 'Default Card'
+                            }
+                        ]
                     });
+
+                    console.log(profile.cards);
 
                     profile.save(function (err, result) {
                         //TODO fix redirect for linkedin save
-                        res.json(data);
+                        res.redirect('/');
                     });
                 }else {
                     res.redirect('/');

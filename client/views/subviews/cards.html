@@ -5,14 +5,14 @@
     </p>
 
   <accordion close-others='oneAtATime'>
-      <accordion-group heading="{{ card.cardTitle }}" ng-repeat="card in cards">
+      <accordion-group heading="{{ card.cardTitle }}" ng-repeat="card in me.cards">
           <div class="row text-center">
               <link href="/css/card.css" rel="stylesheet">
               <div class="card-container center"> <!-- ontouchstart="this.classList.toggle('hover');" -->
                 <div class="flipper">
                           <div class="front">
                               <div class="nav">
-                                  <a href="#" editable-text="card.pictureUrl"><img src="{{ card.pictureUrl }}"></a>
+                                    <a href="#" editable-text="card.pictureUrl"><img src="{{ card.pictureUrl }}"></a>
                               </div>
 
                               <div id="name" class="title-entry" editable-text="card.formattedName" >{{ card.formattedName }}</div>

@@ -55,52 +55,13 @@ app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
     function($scope, $http, $rootScope, $window) {
         auth($rootScope, $http, $window);
 
-        function updateFromBackEnd() {
-            $scope.me = me;
-            $scope.cards = cards;
-        }
-        var cards;
-        var me = $http.get('/api/getme').success(function(pro) {
-            //console.log(pro);
-            cards = $http.get('/api/cards/' + me.linkedinid).success(function(data) {
-                console.log('pro '+ pro);
-                if(true) {
-                    data[0] = {
-                        linkedinid: pro.linkedinid,
-                        formattedName: pro.formattedName,
-                        email: pro.email,
-                        website: pro.website,
-                        phoneNumber: pro.phoneNumber,
-                        location: pro.location,
-                        healine: pro.headline,
-                        pictureUrl: pro.pictureUrl,
-                        cardTitle: 'New Buisness Card!'
-                    };
-
-                }
-                console.log(data);
-                $scope.cards = data;
-                return data;
-            });
-            return pro;
+        var me = $http.get('/api/getme').success(function(result) {
+            console.log(result);
+            $scope.me = result;
+            return result;
         });
 
 
-        $scope.save = '';
-        var setSave = function(data) {
-            $scope.save = data;
-        };
-
-        $scope.onSave = function() {
-
-            var cards = $scope.cards;
-            console.log(cards);
-            for(var i = 0; i < cards.length; i++) {
-                var text = '/api/savecard/' + cards[i].id + '/'+ me.linkedinid + '/' + cards[i].formattedName + '/' + cards[i].email + '/' + cards[i].website + '/' + cards[i].phoneNumber + '/' + cards[i].location + '/' + cards[i].headline + '/' + cards[i].pictureUrl + '/' + cards[i].title;
-                console.log(text);
-                $http.get(text).success(setSave);
-            }
-        };
 }]);
 
 
