@@ -15,9 +15,6 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/login', {
             templateUrl: 'subviews/login.html',
             controller: 'LoginController'
-        }).when('/card', {
-            templateUrl: 'subviews/card.html',
-            controller: 'CardController'
         }).when('/cards', {
             templateUrl: 'subviews/cards.html',
             controller: 'CardsController'
@@ -56,10 +53,33 @@ app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
         auth($rootScope, $http, $window);
 
         var me = $http.get('/api/getme').success(function(result) {
-            console.log(result);
             $scope.me = result;
             return result;
         });
+
+        $scope.onSave = function() {
+            $http.post('/api/save/' + $scope.me.linkedinid, { cards: $scope.me.cards });
+            $window.location.href = '/#/cards';
+            /* TODO fix save alert
+            $scope.alerts = [
+                { type: 'danger', msg: "It looks like you are not logged in. Please loggin via Linkedin at the above link"}
+            ];
+            */
+        };
+
+        $scope.onNewCard = function() {
+            $scope.me.cards.push({
+                'linkedinid': $scope.me.linkedinid,
+                'formattedName': $scope.me.formattedName,
+                'email': $scope.me.email,
+                'website': 'http://example.com',
+                'phoneNumber': $scope.me.phoneNumber,
+                'location': $scope.me.location,
+                'headline': $scope.me.headline,
+                'pictureUrl': $scope.me.pictureUrl,
+                'cardTitle': 'New Card'
+            });
+        };
 
 
 }]);
@@ -84,23 +104,6 @@ app.controller('LoginController', ['$scope', '$http', '$rootScope',
     function($scope, $http, $rootScope) {
         login($rootScope, $http);
 }]);
-
-app.controller('CardController', ['$scope', '$http', '$rootScope', '$window',
-    function($scope, $http, $rootScope, $window) {
-
-        auth($rootScope, $http, $window);
-
-        $http.get('api/getme').success(function(data) {
-            $scope.formattedName = data.formattedName;
-            $scope.headline = data.headline;
-            $scope.email = data.email;
-            $scope.phoneNumber = data.phoneNumber;
-            $scope.location = data.location;
-            $scope.pictureUrl = data.pictureUrl;
-            $scope.website = data.website;
-        });
-}]);
-
 
 app.controller('MeController', ['$scope', '$http', '$rootScope', '$window',
     function($scope, $http, $rootScope, $window) {

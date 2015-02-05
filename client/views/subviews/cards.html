@@ -1,8 +1,7 @@
 <div class="row text-center">
 <div>
-    <p>
-        <h1>{{ save }}</h1>
-    </p>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <br />
 
   <accordion close-others='oneAtATime'>
       <accordion-group heading="{{ card.cardTitle }}" ng-repeat="card in me.cards">
@@ -29,4 +28,6 @@
 </accordion>
 <br />
 
+<button class="btn btn-success" ng-click="onNewCard()">+ New Card</button>
 <button class="btn btn-primary" ng-click="onSave()">Save</button>
+<button class="btn btn-danger" ng-click="onCancel()">Cancel</button>

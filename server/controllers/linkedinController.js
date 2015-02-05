@@ -1,9 +1,4 @@
 var LinkedinProfile = require('../models/linkedin');
-var Card = require('../models/card');
-
-module.exports.getcard = function(req, res) {
-    //TODO make get card post api call
-};
 
 module.exports.isloggedin = function(req, res) {
     var session = req.session;
@@ -27,48 +22,12 @@ module.exports.getme = function(req, res) {
     });
 };
 
-module.exports.getCards = function(req, res) {
-    Card.find({ linkedinid: req.params.linkedinid }, function(err, result) {
-        res.json(result);
-    });
-};
-
-module.exports.getCard = function(req, res) {
-    Card.findOne({ _id: mongoose.Types.ObjectId(req.params.cardid) }, function(err, result) {
-        res.json(result);
-    });
-};
-
-module.exports.saveCard = function(req, res) {
-    var params = req.params;
-
-    var card = new Card({
-        id: params.id,
-        linkedinid: params.linkedinid,
-        formattedName: params.formattedName,
-        email: params.email,
-        website: params.website,
-        phoneNumber: params.phoneNumber,
-        location: params.location,
-        headline: params.headline,
-        pictureUrl: params.pictureUrl,
-        cardTitle: params.cardTitle
-    });
-
-    card.save(function(err, result) {
-        //TODO fix redirect for save card
-        var msgs;
-        if(err === null) {
-            msgs = {
-                saved: 'true'
-            };
-        }else {
-            msgs = {
-                saved: 'true'
-            };
-        }
-        console.log('saved:' + msg.saved);
-        res.json(msgs);
+module.exports.save = function(req, res) {
+    console.log(req.body.cards);
+    console.log(req.params.linkedinid);
+    LinkedinProfile.update({ linkedinid: req.params.linkedinid }, { cards: req.body.cards }, {}, function(err, numberAffected, raw) {
+        console.log(raw);
+        console.log(numberAffected);
     });
 };
 
