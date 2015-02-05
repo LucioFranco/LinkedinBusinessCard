@@ -18,9 +18,6 @@ var routes = require('./routes');
 mongoose.connect('mongodb://localhost:27017/mean-demo');
 var linkedin = Linkedin.init(process.env.apisecret);
 
-console.log('asdfs' + process.env.apikey);
-console.log('asdf' + process.env.apisecret);
-
 app.use(bodyParser());
 app.use(session({ secret: 'ombudsecret' }));
 app.use('/js', express.static(__dirname + '/client/js'));

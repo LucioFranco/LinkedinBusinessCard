@@ -54,6 +54,7 @@ app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
 
         var me = $http.get('/api/getme').success(function(result) {
             $scope.me = result;
+            console.log(result)
             return result;
         });
 
@@ -81,7 +82,13 @@ app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
             });
         };
 
+        $scope.onCancel = function() {
+            $window.location.href = '/';
+        };
 
+        $scope.onDelete = function($index) {
+            $scope.me.cards.splice($index, 1);
+        };
 }]);
 
 

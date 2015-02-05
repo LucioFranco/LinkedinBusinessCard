@@ -23,11 +23,7 @@ module.exports.getme = function(req, res) {
 };
 
 module.exports.save = function(req, res) {
-    console.log(req.body.cards);
-    console.log(req.params.linkedinid);
     LinkedinProfile.update({ linkedinid: req.params.linkedinid }, { cards: req.body.cards }, {}, function(err, numberAffected, raw) {
-        console.log(raw);
-        console.log(numberAffected);
     });
 };
 
