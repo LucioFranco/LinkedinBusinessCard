@@ -81,8 +81,6 @@ module.exports.callback = function(req, res) {
                         ]
                     });
 
-                    console.log(profile.cards);
-
                     profile.save(function (err, result) {
                         //TODO fix redirect for linkedin save
                         res.redirect('/');

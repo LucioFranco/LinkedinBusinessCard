@@ -15,7 +15,7 @@ var session = require('express-session');
 var routes = require('./routes');
 
 //FIXME fix database from mean-demo to linkedinbusiness
-mongoose.connect('mongodb://localhost:27017/mean-demo');
+mongoose.connect('mongodb://localhost:27017/linkedin-app');
 var linkedin = Linkedin.init(process.env.apisecret);
 
 app.use(bodyParser());
