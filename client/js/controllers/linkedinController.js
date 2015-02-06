@@ -9,8 +9,8 @@ app.config(['$routeProvider', '$locationProvider',
         $routeProvider.when('/', {
             templateUrl: 'subviews/home.html',
             controller: 'HomeController'
-        }).when('/me', {
-            templateUrl: 'subviews/me.html',
+        }).when('/profile', {
+            templateUrl: 'subviews/profile.html',
             controller: 'MeController'
         }).when('/login', {
             templateUrl: 'subviews/login.html',
@@ -18,6 +18,9 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/cards', {
             templateUrl: 'subviews/cards.html',
             controller: 'CardsController'
+        }).when('/card/:linkedinid/:cardnumber', {
+            templateUrl: 'subviews/card.html',
+            controller: 'CardController'
         }).otherwise({
             redirectTo: '/'
         });
@@ -30,10 +33,14 @@ function login($rootScope, $http) {
         if(data.isloggedin === 'true') {
             $rootScope.login = 'Logout';
             $rootScope.loginurl = 'logout';
+            $rootScope.profile = 'My Profile';
+            $rootScope.cards = 'My Cards';
             return true;
         }else {
             $rootScope.login = 'Login';
             $rootScope.loginurl = '#/login';
+            $rootScope.profile = ' ';
+            $rootScope.cards = ' ';
             return false;
         }
     });
@@ -46,15 +53,21 @@ function auth($rootScope, $http, $window) {
     }
 }
 
-
 ///////////PAGE CONTROLLERS////////////////
+app.controller('CardController', ['$scope', '$routeParams', '$http',
+    function($scope, $routeParams, $http) {
+        var card = $http.get('/api/card/' + $routeParams.linkedinid + '/' + $routeParams.cardnumber).success(function(result) {
+            $scope.card = result;
+        });
+}]);
+
+
 app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
     function($scope, $http, $rootScope, $window) {
         auth($rootScope, $http, $window);
 
         var me = $http.get('/api/getme').success(function(result) {
             $scope.me = result;
-            console.log(result)
             return result;
         });
 

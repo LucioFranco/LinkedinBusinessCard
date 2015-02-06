@@ -9,6 +9,12 @@ module.exports.isloggedin = function(req, res) {
     }
 };
 
+module.exports.getCard = function(req, res) {
+    LinkedinProfile.findOne({ linkedinid: req.params.linkedinid }, function(err, result) {
+        res.json(result.cards[req.params.index]);
+    });
+};
+
 module.exports.getme = function(req, res) {
     var session = req.session;
 

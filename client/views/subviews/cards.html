@@ -4,7 +4,7 @@
     <br />
 
   <accordion close-others='oneAtATime'>
-      <accordion-group heading="{{ card.cardTitle }}" ng-repeat="card in me.cards">
+      <accordion-group heading="Card #{{ $index + 1 }}" ng-repeat="card in me.cards">
           <div class="row text-center">
               <link href="/css/card.css" rel="stylesheet">
               <div class="card-container center"> <!-- ontouchstart="this.classList.toggle('hover');" -->
@@ -26,7 +26,12 @@
                 </div>
                 <br />
                 <br />
-
+                <p>
+                    Share this link!
+                </p>
+                <textarea id="textArea1" rows="1" cols="38" readonly="true">http://localhost:3000/#/card/{{ me.linkedinid }}/{{ $index }}</textarea>
+                <br />
+                <br />
                 <button class="btn btn-danger" ng-click="onDelete($index)">Delete</button>
   </accordion-group>
 </accordion>

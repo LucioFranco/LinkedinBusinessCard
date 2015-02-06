@@ -66,6 +66,8 @@ app.get('/api/getme', linkedinController.getme);
 
 app.post('/api/save/:linkedinid', linkedinController.save);
 
+app.get('/api/card/:linkedinid/:index', linkedinController.getCard);
+
 app.all('/', routes.layout);
 
 var port = process.env.PORT || 3000;
