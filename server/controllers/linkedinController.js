@@ -51,12 +51,13 @@ module.exports.callback = function(req, res) {
 
         linkedin.people.me(function(err, data) {
             session.linkedinid = data.id;
+            console.log(data);
             LinkedinProfile.findOne({ linkedinid: data.id }, function (err, result) {
                 if(result === null) {
                     console.log("adding " + data.firstName + " to the db");
 
                     var phoneNumber = '888-888-8888';
-                    if(data.phoneNumbers.length > 0) {
+                    if(data.phoneNumbers !== null && data.phoneNumbers.length > 0) {
                         phoneNumber = data.phoneNumbers.values[0].phoneNumber;
                     }
 
