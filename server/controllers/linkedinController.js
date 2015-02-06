@@ -34,7 +34,7 @@ module.exports.save = function(req, res) {
 };
 
 module.exports.callback = function(req, res) {
-    var Linkedin = require('node-linkedin')(process.env.apikey, process.env.apisecret, 'http://localhost:3000/oauth/linkedin/callback');
+    var Linkedin = require('node-linkedin')(process.env.apikey, process.env.apisecret, process.env.callback);
     var session = req.session;
 
     Linkedin.auth.getAccessToken(res, req.query.code, function(err, results) {
