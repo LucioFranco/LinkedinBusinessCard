@@ -29,7 +29,9 @@
                 <p>
                     Share this link!
                 </p>
-                <textarea id="textArea1" rows="1" cols="38" readonly="true">{{ origin }}/#/card/{{ me.linkedinid }}/{{ $index }}</textarea>
+                <textarea style="text-align:center;"id="textArea1" rows="1" cols="65" readonly="true">{{ origin }}/#/card/{{ me.linkedinid }}/{{ $index }}</textarea>
+
+
                 <br />
                 <br />
                 <button class="btn btn-danger" ng-click="onDelete($index)">Delete</button>
@@ -40,3 +42,5 @@
 <button class="btn btn-success" ng-click="onNewCard()">+ New Card</button>
 <button class="btn btn-primary" ng-click="onSave()">Save</button>
 <button class="btn btn-danger" ng-click="onCancel()">Cancel</button>
+
+<br />
