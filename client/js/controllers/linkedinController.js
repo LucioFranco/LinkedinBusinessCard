@@ -65,6 +65,7 @@ app.controller('CardController', ['$scope', '$routeParams', '$http',
 app.controller('CardsController', ['$scope', '$http', '$rootScope', '$window',
     function($scope, $http, $rootScope, $window) {
         auth($rootScope, $http, $window);
+        $scope.origin = $window.location.origin;
 
         var me = $http.get('/api/getme').success(function(result) {
             $scope.me = result;

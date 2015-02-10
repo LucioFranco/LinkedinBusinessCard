@@ -29,7 +29,7 @@
                 <p>
                     Share this link!
                 </p>
-                <textarea id="textArea1" rows="1" cols="38" readonly="true">http://localhost:3000/#/card/{{ me.linkedinid }}/{{ $index }}</textarea>
+                <textarea id="textArea1" rows="1" cols="38" readonly="true">{{ origin }}/#/card/{{ me.linkedinid }}/{{ $index }}</textarea>
                 <br />
                 <br />
                 <button class="btn btn-danger" ng-click="onDelete($index)">Delete</button>
