@@ -15,7 +15,7 @@ var session = require('express-session');
 var routes = require('./routes');
 
 //FIXME fix database from mean-demo to linkedinbusiness
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/linkedin-app');
+mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGO_URI || 'mongodb://localhost:27017/linkedin-app');
 var linkedin = Linkedin.init(process.env.apisecret);
 
 app.use(bodyParser());
@@ -38,7 +38,6 @@ app.get('/oauth/login', function(req, res) {
     'r_basicprofile',
     'r_fullprofile',
     'r_emailaddress',
-    'r_network',
     'r_contactinfo'
     ]);
 });
