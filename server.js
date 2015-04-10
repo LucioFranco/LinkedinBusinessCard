@@ -14,12 +14,10 @@ var Linkedin = require('node-linkedin')(process.env.apikey, process.env.apisecre
 var session = require('express-session');
 var routes = require('./routes');
 
-//FIXME fix database from mean-demo to linkedinbusiness
-console.log(process.env);
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/linkedin-app');
 var linkedin = Linkedin.init(process.env.apisecret);
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(session({ secret: 'ombudsecret' }));
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/img', express.static(__dirname + '/client/img'));

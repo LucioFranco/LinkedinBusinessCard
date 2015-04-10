@@ -46,7 +46,7 @@ module.exports.callback = function(req, res) {
          * Results have something like:
          * {"expires_in":5184000,"access_token":". . . ."}
          */
-        var linkedin = Linkedin.init(JSON.parse(results).access_token);
+        var linkedin = Linkedin.init(results.access_token);
         var resjson = {};
 
         linkedin.people.me(function(err, data) {
