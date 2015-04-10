@@ -7,7 +7,7 @@
     "bower": "^1.3.12",
     "express": "^4.11.1",
     "express-session": "^1.10.2",
-    "mongoose": "^3.8.22",
+    "mongoose": "3.8.22",
     "node-env-file": "^0.1.4",
     "node-linkedin": "^0.3.5"
     },
